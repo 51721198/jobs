@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>框架布局，用Frameset如何实现固定宽度的居中</title>
+<head>
+</head>
+<frameset cols="*,1400,*" frameborder="yes" border="1" framespacing="0">
+<frame src="about:blank"$amp;>amp;$lt;/frame>
+<frameset rows="150,*,1" frameborder="yes" border="1" framespacing="0" scrolling="yes">
+   <frame src="../img/head.jpg" name="topFrame" scrolling="no" noresize="noresize" id="topFrame" />
+   <frameset rows="85%,*" framespacing="1" >
+		<frameset cols="15%,*" >
+		   <frame name="left" src="left.htm"   scrolling=no  noresize>
+		   <frame name="right" src="/license/licenseController/showall"  scrolling=yes  noresize>
+		</frameset>
+   <frame src="bottom.html" name="bottomFrame" scrolling="no" noresize="noresize" id="bottomFrame" />
+</frameset>
+<!--  
+<frame src="about:blank"$amp;>amp;$lt;/frame>
+-->
+</frameset>
+
+</frameset>
+<noframes>
+<body$amp;>amp;$lt;/body>
+    </noframes>
+</html>

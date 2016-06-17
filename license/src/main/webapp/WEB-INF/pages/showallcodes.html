@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet type="text/css" href="../css/showallcodes.css">
+<script language="javascript" type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){                                         //初始化jQuery
+					$.ajax({                               
+					type:"GET",
+					url:"/license/licenseController/showallcodes",
+				    dataType:"json",
+				    success:function(data){
+				    	var i = 0;
+				    	for (i;i<(data.length);i++) {
+				    		var row = "rownum_"+i;
+				    		var but = "button_"+i;
+					    	//alert(row);
+				    	    	$("#allcodes").append("<tr id="+row+"><td>"
+				    	    			+ data[i].serialNumberId+ "</td><td>"
+				    	    			+ data[i].sourceNumber + "</td><td>"
+				    	    			+ data[i].createDay + "</td><td>" 
+				    	    			+ data[i].expiredDate + "</td><td>" 
+				    	    			+ data[i].encryptedNumber +"</td><td>" 
+				    	    			+ data[i].expiredFlag +"</td><td>" 
+				    	    			+ data[i].validDays + "</td><td>" 
+				    	    			+ data[i].hospitalNumber+"</td><td>"
+				    	    			+ "<button id="+but+" class='del' type='button' value="+data[i].serialNumberId+">删除</button>"+"</td></tr>");
+				    	    	
+				    	    	if(data[i].expiredFlag == 1){
+				    	    	$("#rownum_"+i).css("color","red");
+				    	    	}
+				    	    	
+				    	    	$("#"+but).on("click",function(){
+						    		//do something;
+						    		var test = $(this).val();
+						    	    alert("确定删除第: "+test+" 条记录？");
+						  });
+			    	 }
+				},
+				    error:function(jqXHR){
+					alert("发生错误：" +jqXHR.status);			    	
+		   },
+	});
+});	
+			
+</script>
+</head>
+<body>
+	<div>
+	<h2>序列号展示页面</h2>
+	<a href="/license/licenseController/tocreate">生成序列号</a>
+	</div>
+	<div>
+	<table class="gridtable" id="allcodes" border="1px" width="80%">
+   		<tr>
+   			<th>序号</th>
+   			<th>原序列号</th>
+   			<th>生成日期</th>
+   			<th>到期日期</th>
+   			<th>加密序列号</th>
+   			<th>到期标识</th>
+   			<th>有效天数</th>
+   			<th>医院编号</th>
+   			<th>操作</th>
+   		</tr>
+   </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vico.license.dao.HospitalDao" >
+  <resultMap id="BaseResultMap" type="com.vico.license.pojo.Hospital" >
+    <id column="hospital_number" property="hospitalNumber" jdbcType="INTEGER" />
+    <result column="hospital_name" property="hospitalName" jdbcType="VARCHAR" />
+    <result column="hospital_phone" property="hospitalPhone" jdbcType="VARCHAR" />
+    <result column="hospital_address" property="hospitalAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hospital_number, hospital_name, hospital_phone, hospital_address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from license_hospital
+    where hospital_number = #{hospitalNumber,jdbcType=INTEGER}
+  </select>
+  
+  <select id="showAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from license_hospital
+  </select>
+ 
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from license_hospital
+    where hospital_number = #{hospitalNumber,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.vico.license.pojo.Hospital" >
+    insert into license_hospital (hospital_name, hospital_phone, 
+      hospital_address)
+    values (#{hospitalName,jdbcType=VARCHAR}, #{hospitalPhone,jdbcType=VARCHAR}, 
+      #{hospitalAddress,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  <insert id="insertSelective" parameterType="com.vico.license.pojo.Hospital" >
+    insert into license_hospital
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hospitalNumber != null" >
+        hospital_number,
+      </if>
+      <if test="hospitalName != null" >
+        hospital_name,
+      </if>
+      <if test="hospitalPhone != null" >
+        hospital_phone,
+      </if>
+      <if test="hospitalAddress != null" >
+        hospital_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hospitalNumber != null" >
+        #{hospitalNumber,jdbcType=INTEGER},
+      </if>
+      <if test="hospitalName != null" >
+        #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalPhone != null" >
+        #{hospitalPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalAddress != null" >
+        #{hospitalAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.vico.license.pojo.Hospital" >
+    update license_hospital
+    <set >
+      <if test="hospitalName != null" >
+        hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalPhone != null" >
+        hospital_phone = #{hospitalPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalAddress != null" >
+        hospital_address = #{hospitalAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hospital_number = #{hospitalNumber,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.vico.license.pojo.Hospital" >
+    update license_hospital
+    set hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      hospital_phone = #{hospitalPhone,jdbcType=VARCHAR},
+      hospital_address = #{hospitalAddress,jdbcType=VARCHAR}
+    where hospital_number = #{hospitalNumber,jdbcType=INTEGER}
+  </update>
+</mapper>

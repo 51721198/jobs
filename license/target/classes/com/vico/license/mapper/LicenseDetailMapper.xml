@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vico.license.dao.LicenseDao" >
+  <resultMap id="BaseResultMap" type="com.vico.license.pojo.LicenseDetail" >
+    <id column="serial_number_id" property="serialNumberId" jdbcType="INTEGER" />
+    <result column="source_number" property="sourceNumber" jdbcType="VARCHAR" />
+    <result column="create_day" property="createDay" jdbcType="VARCHAR" />
+    <result column="expired_date" property="expiredDate" jdbcType="VARCHAR" />
+    <result column="encrypted_number" property="encryptedNumber" jdbcType="VARCHAR" />
+    <result column="expired_flag" property="expiredFlag" jdbcType="INTEGER" />
+    <result column="valid_days" property="validDays" jdbcType="INTEGER" />
+    <result column="hospital_number" property="hospitalNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serial_number_id, source_number, create_day, expired_date, encrypted_number, expired_flag, 
+    valid_days, hospital_number
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from license_detail
+    where serial_number_id = #{serialNumberId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from license_detail
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from license_detail
+    where serial_number_id = #{serialNumberId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.vico.license.pojo.LicenseDetail" >
+    insert into license_detail (serial_number_id, source_number, create_day, 
+      expired_date, encrypted_number, expired_flag, 
+      valid_days, hospital_number)
+    values (#{serialNumberId,jdbcType=INTEGER}, #{sourceNumber,jdbcType=VARCHAR}, #{createDay,jdbcType=VARCHAR}, 
+      #{expiredDate,jdbcType=VARCHAR}, #{encryptedNumber,jdbcType=VARCHAR}, #{expiredFlag,jdbcType=INTEGER}, 
+      #{validDays,jdbcType=VARCHAR}, #{hospitalNumber,jdbcType=INTEGER})
+      
+  </insert>
+  <insert id="insertSelective" parameterType="com.vico.license.pojo.LicenseDetail" >
+    insert into license_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialNumberId != null" >
+        serial_number_id,
+      </if>
+      <if test="sourceNumber != null" >
+        source_number,
+      </if>
+      <if test="createDay != null" >
+        create_day,
+      </if>
+      <if test="expiredDate != null" >
+        expired_date,
+      </if>
+      <if test="encryptedNumber != null" >
+        encrypted_number,
+      </if>
+      <if test="expiredFlag != null" >
+        expired_flag,
+      </if>
+      <if test="validDays != null" >
+        valid_days,
+      </if>
+      <if test="hospitalNumber != null" >
+        hospital_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialNumberId != null" >
+        #{serialNumberId,jdbcType=INTEGER},
+      </if>
+      <if test="sourceNumber != null" >
+        #{sourceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDay != null" >
+        #{createDay,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredDate != null" >
+        #{expiredDate,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptedNumber != null" >
+        #{encryptedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredFlag != null" >
+        #{expiredFlag,jdbcType=INTEGER},
+      </if>
+      <if test="validDays != null" >
+        #{validDays,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalNumber != null" >
+        #{hospitalNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <!--  
+  <update id="updateByPrimaryKeySelective" parameterType="com.vico.license.pojo.LicenseDetail" >
+    update license_detail
+    <set >
+      <if test="sourceNumber != null" >
+        source_number = #{sourceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDay != null" >
+        create_day = #{createDay,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredDate != null" >
+        expired_date = #{expiredDate,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptedNumber != null" >
+        encrypted_number = #{encryptedNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredFlag != null" >
+        expired_flag = #{expiredFlag,jdbcType=INTEGER},
+      </if>
+      <if test="validDays != null" >
+        valid_days = #{validDays,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalNumber != null" >
+        hospital_number = #{hospitalNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where serial_number_id = #{serialNumberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.vico.license.pojo.LicenseDetail" >
+    update license_detail
+    set source_number = #{sourceNumber,jdbcType=VARCHAR},
+      create_day = #{createDay,jdbcType=VARCHAR},
+      expired_date = #{expiredDate,jdbcType=VARCHAR},
+      encrypted_number = #{encryptedNumber,jdbcType=VARCHAR},
+      expired_flag = #{expiredFlag,jdbcType=INTEGER},
+      valid_days = #{validDays,jdbcType=VARCHAR},
+      hospital_number = #{hospitalNumber,jdbcType=INTEGER}
+    where serial_number_id = #{serialNumberId,jdbcType=INTEGER}
+  </update>
+  -->
+  
+  
+  
+  
+</mapper>

@@ -1,0 +1,58 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+	
+	
+	<!-- 设置spring容器的上下文 -->
+	
+  	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-mybatis.xml,classpath:spring.xml</param-value>
+  	</context-param>
+  	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+		
+		<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		</listener>
+		<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 在这里设置前端控制器dispatcherservlet容器的上下文，也可以不设置，使用默认 -->
+		<load-on-startup>1</load-on-startup>
+		</servlet>
+		
+		<servlet-mapping>
+		<servlet-name>jsp</servlet-name>
+		<url-pattern>*.html</url-pattern>
+		</servlet-mapping>
+	    
+		<servlet-mapping>
+			<servlet-name>springmvc</servlet-name>
+			<url-pattern>/</url-pattern>
+		</servlet-mapping>
+		
+
+	<welcome-file-list>
+    	<welcome-file>index.html</welcome-file>
+    	<welcome-file>index.htm</welcome-file>
+    	<welcome-file>index.jsp</welcome-file>
+  	</welcome-file-list>
+  	
+</web-app>
