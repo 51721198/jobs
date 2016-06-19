@@ -6,9 +6,7 @@
     <artifactId>license</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.vico.license</groupId>
   <artifactId>verify</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>verify</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -38,5 +36,26 @@
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.4.0</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+	    <version>1.3.0</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>5.1.18</version>
+	</dependency>
+	
+	
+	
   </dependencies>
 </project>

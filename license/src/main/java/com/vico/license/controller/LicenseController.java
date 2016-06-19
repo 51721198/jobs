@@ -35,14 +35,14 @@ public class LicenseController {
 	}
 	
 	
-	//接收前端AJAX传过来的请求
+	//接收前端AJAX请求:生成序列号
 	@RequestMapping(value="createcode")
 	public void sourceCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=UTF-8");
 		String date = request.getParameter("duedate");  
-		int number = Integer.parseInt(request.getParameter("hosnumber"));
+		//int number = Integer.parseInt(request.getParameter("hosnumber"));
 		
-		String sourcecode = licenseService.createSourceCode(date,number);
+		String sourcecode = licenseService.createSourceCode(date);
 		
 		String jsonstr = "{'success':'true','msg':'"+sourcecode+"'}";
 		JSON res = JSON.parseObject(jsonstr);
@@ -51,7 +51,7 @@ public class LicenseController {
 		response.getWriter().print(res);
 	}
 	
-	//接受前端AJAX传过来的请求
+	//接受前端AJAX请求：加密序列号
 	@RequestMapping(value="encryptcode")
 	public void encryptCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		

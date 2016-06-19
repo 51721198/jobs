@@ -31,16 +31,16 @@ public class LicenseServiceImpTest {
 
 	@Test
 	public void testcreateSourceCode() {
-		lsi.createSourceCode("20170610064507", 32);
+		//lsi.createSourceCode("20170610064507", 32);
 	}
 	
 	@Test
 		public void testMybatis() {
 		
 			LicenseDetail ldetail = new LicenseDetail();
-			ldetail.setCreateDay("19238888888888");
+			ldetail.setCreateDay("2016-05-28");
 			ldetail.setEncryptedNumber("asdhhas");
-			ldetail.setExpiredDate("19878987789023");
+			ldetail.setExpiredDate("2017-07-15");
 			ldetail.setExpiredFlag(1);
 			ldetail.setHospitalNumber(23);
 			//ldetail.setSerialNumberId(1);

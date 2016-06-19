@@ -33,7 +33,7 @@ public class LicenseServiceImp implements LicenseService {
 	}
 
 	@Override
-	public String createSourceCode(String duedate, int hospitalnumber) {
+	public String createSourceCode(String duedate) {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 				//需要的参数有：当前时间，UUID，到期时间,医院的编号
@@ -44,12 +44,13 @@ public class LicenseServiceImp implements LicenseService {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String current = sdf.format(date);
 				sb.append(current);
-				sb.append(hospitalnumber);
-				String id = UUID.randomUUID().toString();
-				sb.append(id);
 				sb.append(duedate);
+				String id = UUID.randomUUID().toString();
+				//System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+id.length());
+				sb.append(id);
+				System.out.println("+++++++++++++++++++++++++++++duedate的总长度是+++++++++++++++++++"+duedate.length());
 				System.out.println(sb);
-			
+				System.out.println("+++++++++++++++++++++++++++++SB的总长度是++++++++++++++++++++++++++"+sb.length());
 		return sb.toString();
 	}
 
@@ -66,7 +67,7 @@ public class LicenseServiceImp implements LicenseService {
 		// TODO Auto-generated method stub
 		
 		int i = licensedao.insert(record);
-		System.out.println(i);
+//		System.out.println(i);
 		
 	}
 
@@ -79,8 +80,8 @@ public class LicenseServiceImp implements LicenseService {
 		while(it.hasNext()){
 			LicenseDetail ld = it.next();
 			String cday = ld.getCreateDay();
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println(cday);
+//			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+//			System.out.println(cday);
 		}
 		
 		return list;

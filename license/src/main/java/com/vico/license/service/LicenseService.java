@@ -7,7 +7,7 @@ import com.vico.license.pojo.LicenseDetail;
 
 public interface LicenseService {
 	
-	public String createSourceCode(String duedate,int hospitalnumber);
+	public String createSourceCode(String duedate);
 	
 	public String createEncryptCode(String code);
 	
