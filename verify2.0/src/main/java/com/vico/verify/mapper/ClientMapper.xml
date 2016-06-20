@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vico.verify.dao.ClientDao" >
+  <resultMap id="BaseResultMap" type="com.vico.verify.pojo.Client" >
+    <result column="encrypted_number" property="encryptedNumber" jdbcType="VARCHAR" />
+    <result column="source_number" property="sourceNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <update id="insertSourceNumber" parameterType="java.lang.String" >
+    update client_verify set source_number = #{sourceNumber,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectSourceNumber" resultType="java.lang.String">
+  		select source_number
+  		from client_verify
+  </select>
+  
+  <select id="selectEncryptedNumber" resultType="java.lang.String">
+  		select encrypted_number
+  		from client_verify
+  </select>
+  
+</mapper>
