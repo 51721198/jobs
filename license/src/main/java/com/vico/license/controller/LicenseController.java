@@ -74,11 +74,13 @@ public class LicenseController {
 		return "showallcodes";
 	}
 	
+	//跳至框架
 	@RequestMapping(value="frame")
 	public String frame(){
 		return "frame1";
 	}
 	
+	//接收AJAX请求：获取所有序列号用于展示
 	@RequestMapping(value="showallcodes")
 	public void showAllCodes(HttpServletRequest request,HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
@@ -95,11 +97,8 @@ public class LicenseController {
 		}
 		
 		String jsonlist = JSON.toJSONString(list);
-		System.out.println(jsonlist);
-		
 		
 		JSON res = JSON.parseArray(jsonlist);
-		System.out.println(res);
 		//Json jsonallcodes = licenseService.objectToJson(list);
 		
 		try {
@@ -110,6 +109,18 @@ public class LicenseController {
 		}
 	}
 	
+	//接收AJAX请求，删除指定ID的序列号条目
+	@RequestMapping(value="deletecode")
+	public String deleteCode(HttpServletRequest request){
+		
+		String codeID = request.getParameter("codeid");
+		
+		System.out.println("+++++++++++++++++++删除信息+++++++++++++++++++++++++++++"+codeID);
+		
+		licenseService.deleteCode(codeID);
+		
+		return "showallcodes";
+	}
 	
 	
 	//把序列号写进数据库,然后跳到展示所有序列号页面
@@ -118,7 +129,6 @@ public class LicenseController {
 				
 		licensedetail.setCreateDay(licensedetail.getSourceNumber().substring(0, 10));          //生成日期
 		int days = licenseService.endDate(licensedetail.getExpiredDate());   //有效天数
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%剩余天数为"+days);
 		licensedetail.setValidDays(days);
 		if(days > 0 ){
 			licensedetail.setExpiredFlag(0);                       //到期标识

@@ -8,13 +8,12 @@
 <script language="javascript" type="text/javascript">
 		$("document").ready(function(){
 				$("#go").click(function(){
-				if($("#name").val() == ''){
+				if($("#name").val() == '' || $("#name").val() < 1){
 					alert("医院名称必填！！");
 					return false;
 			}				
 	})							
 });
-
 
 </script>
 </head>
@@ -23,13 +22,13 @@
 		<h2>添加医院信息</h2>
 	<div>
 		<form action="/license/hospitalController/addhospital" method="post">
-			请输入医院名称<input id="name" type="text" name="hospitalName">
+			医院名称：<input id="name" type="text" name="hospitalName">
 			<br>
 				<br>
-			请输入医院电话<input type="text" name="hospitalPhone">
+			医院电话：<input type="text" name="hospitalPhone">
 			<br>
 				<br>
-			请输入医院地址<input type="text" name="hospitalAddress">
+			医院地址：<input type="text" name="hospitalAddress">
 			<br>
 				<br>
 			<input id="go" type="submit" value="提交">

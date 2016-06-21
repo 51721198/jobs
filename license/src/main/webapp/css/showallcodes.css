@@ -1,5 +1,6 @@
 
 table.gridtable {
+	width: 97%;
 	font-family: verdana,arial,sans-serif;
 	font-size:11px;
 	color:#333333;
@@ -19,6 +20,5 @@ table.gridtable td {
 	padding: 8px;
 	border-style: solid;
 	border-color: #666666;
-	background-color: #ffffff;
 }
 

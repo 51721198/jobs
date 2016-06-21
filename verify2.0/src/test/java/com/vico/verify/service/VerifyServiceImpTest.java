@@ -16,16 +16,8 @@ import com.vico.verify.dao.ClientDao;
 
 public class VerifyServiceImpTest {
 	
-	private VerifyService verifyservice;
-
-	public VerifyService getVerifyservice() {
-		return verifyservice;
-	}
-	
 	@Autowired
-	public void setVerifyservice(VerifyService verifyservice) {
-		this.verifyservice = verifyservice;
-	}
+	private VerifyService verifyservice;
 
 	@Test
 	public void testSourceNumber() {

@@ -14,36 +14,35 @@ import com.vico.license.pojo.Hospital;
 @Service
 public class HospitalServiceImp implements HospitalService {
 
-	private HospitalDao hospitaldao;
-	
-	public HospitalDao getHospitaldao() {
-		return hospitaldao;
-	}
-	
 	@Autowired
-	public void setHospitaldao(HospitalDao hospitaldao) {
-		this.hospitaldao = hospitaldao;
-	}
+	private HospitalDao hospitaldao;
 
+	//获取所有医院信息
 	@Override
 	public List<Hospital> showAll() {
-		// TODO Auto-generated method stub
 		
 		List<Hospital> list = hospitaldao.showAll();
 		return list;
 	}
-
+	
+	//添加一条医院记录
 	@Override
 	public void addHospital(Hospital record) {
-		// TODO Auto-generated method stub
+		
 		hospitaldao.insert(record);
 	}
 
+	//获取一条医院信息
 	@Override
 	public Hospital showOne() {
-		// TODO Auto-generated method stub
 		
 		return null;
+	}
+
+	@Override
+	public void deleteHospital(String hospitalnumber) {
+		// TODO Auto-generated method stub
+		hospitaldao.deleteByPrimaryKey(Integer.parseInt(hospitalnumber));
 	}
 
 }

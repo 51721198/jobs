@@ -17,4 +17,6 @@ public interface LicenseService {
 	
 	public int endDate(String date);
 	
+	public void deleteCode(String codeID);
+	
 }

@@ -6,29 +6,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet type="text/css" href="../css/showallcodes.css">
 <script language="javascript" type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){                                         //初始化jQuery
-					$.ajax({                               
-					type:"GET",
-					url:"/license/hospitalController/showhospital",
-				    dataType:"json",
-				    success:function(data){
-				    	    for (var i = 0;i<(data.length);i++) {
-				    	    	$("#allhospital").append("<tr><td>" 
-				    	    			+ data[i].hospitalNumber+ "</td><td>"
-				    	    			+ data[i].hospitalName + "</td><td>"
-				    	    			+ data[i].hospitalPhone + "</td><td>" 
-				    	    			+ data[i].hospitalAddress + "</td><td>" 
-				    	    			+ "<button type='button'>删除</button>"+"</td></tr>");
-				    			}
-				    },
-				    error:function(jqXHR){
-					alert("发生错误：" +jqXHR.status);			    	
-				}
-		  });
-	});
-	
-</script>
+<script language="javascript" type="text/javascript" src="../js/hospital.js"></script>
 </head>
 <body>
 	<div>

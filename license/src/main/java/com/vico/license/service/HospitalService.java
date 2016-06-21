@@ -10,5 +10,7 @@ public interface HospitalService {
 	public void addHospital(Hospital record);
 	
 	public Hospital showOne();
+	
+	public void deleteHospital(String hospitalnumber);
 
 }
