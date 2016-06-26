@@ -18,4 +18,6 @@ public interface LicenseDao {
     int updateByPrimaryKey(LicenseDetail record);
     
     List<LicenseDetail> selectAll();
+    
+    List<LicenseDetail> selectByhospitalNumber(int hospitalNumber);
 }

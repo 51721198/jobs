@@ -2,7 +2,6 @@ package com.vico.license.service;
 
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
 import com.vico.license.pojo.LicenseDetail;
 
 public interface LicenseService {
@@ -15,8 +14,12 @@ public interface LicenseService {
 	
 	public List<LicenseDetail> listAllCodes();
 	
+	public LicenseDetail listOneCode(int serialNumberId);
+	
 	public int endDate(String date);
 	
 	public void deleteCode(String codeID);
+	
+	public List<LicenseDetail> selectByhospitalNumber(int hospitalNumber);
 	
 }

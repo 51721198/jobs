@@ -16,6 +16,7 @@ public class HospitalServiceImp implements HospitalService {
 
 	@Autowired
 	private HospitalDao hospitaldao;
+	
 
 	//获取所有医院信息
 	@Override
@@ -42,7 +43,25 @@ public class HospitalServiceImp implements HospitalService {
 	@Override
 	public void deleteHospital(String hospitalnumber) {
 		// TODO Auto-generated method stub
+	
 		hospitaldao.deleteByPrimaryKey(Integer.parseInt(hospitalnumber));
+	}
+	
+
+	@Override
+	public String selectHospitalName(int hospitalNumber) {
+		// TODO Auto-generated method stub
+		
+		String hospitalName = null;
+		//hospitalName = hospitaldao.selectByPrimaryKey(hospitalNumber).getHospitalName();
+		
+		if(hospitaldao.selectByPrimaryKey(hospitalNumber) == null){
+			return "无此医院信息";
+		}
+		
+		hospitalName = hospitaldao.selectByPrimaryKey(hospitalNumber).getHospitalName();
+		
+		return hospitalName;
 	}
 
 }

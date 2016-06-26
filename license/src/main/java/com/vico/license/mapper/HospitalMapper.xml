@@ -10,6 +10,7 @@
   <sql id="Base_Column_List" >
     hospital_number, hospital_name, hospital_phone, hospital_address
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

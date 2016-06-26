@@ -7,7 +7,9 @@ public interface HospitalService {
 	
 	public List<Hospital> showAll();
 	
-	public void addHospital(Hospital record);
+	public String selectHospitalName(int hospitalNumber);
+	
+	public void addHospital(Hospital hospital);
 	
 	public Hospital showOne();
 	

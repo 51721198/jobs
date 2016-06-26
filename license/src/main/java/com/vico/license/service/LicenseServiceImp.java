@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.vico.license.dao.LicenseDao;
 import com.vico.license.pojo.LicenseDetail;
 import com.vico.license.util.Encrypt;
+import com.vico.license.util.MixDate;
 import com.vico.license.util.TimeDiff;
 
 
@@ -30,12 +31,11 @@ public class LicenseServiceImp implements LicenseService {
 				String current = sdf.format(date);
 				sb.append(current);
 				sb.append(duedate);
-				
-				//此处添加时间混淆算法
-				
 				String id = UUID.randomUUID().toString();
 				sb.append(id);
-		return sb.toString();
+				
+				//混淆时间
+				return MixDate.mixDate(sb.toString());
 	}
 	
 	//加密序列号
@@ -48,16 +48,25 @@ public class LicenseServiceImp implements LicenseService {
 	
 	//保存序列号
 	@Override
-	public void saveCode(LicenseDetail record) {
-		
-		licensedao.insert(record);
-		
+	public void saveCode(LicenseDetail licensedetail){
+	
+	String sourceNumber = MixDate.demixDate(licensedetail.getSourceNumber());   //消除混淆
+	licensedetail.setCreateDay(sourceNumber.substring(0, 10));                  //生成日期
+	int days = endDate(licensedetail.getExpiredDate());                         //有效天数
+	if(days < 0){
+		licensedetail.setValidDays(0);
+	}
+	licensedetail.setValidDays(days);
+	if(days > 0 ){
+		licensedetail.setExpiredFlag(0);                                         //到期标识
+	}
+	else licensedetail.setExpiredFlag(1);
+		licensedao.insert(licensedetail);
 	}
 
 	//获取所有序列号
 	@Override
 	public List<LicenseDetail> listAllCodes() {
-		
 		List<LicenseDetail> list = licensedao.selectAll();
 		return list;
 	}
@@ -65,15 +74,30 @@ public class LicenseServiceImp implements LicenseService {
 	//计算到期日期
 	@Override
 	public int endDate(String date) {
-		
 		int enddate = TimeDiff.countDay(date);
 		return enddate;
 	}
 
 	@Override
 	public void deleteCode(String codeID) {
-		
 		licensedao.deleteByPrimaryKey(Integer.parseInt(codeID));
 	}
+
+	@Override
+	public LicenseDetail listOneCode(int serialNumberId) {
+		// TODO Auto-generated method stub
+		LicenseDetail licensedetail = licensedao.selectByPrimaryKey(serialNumberId);
+		return licensedetail;
+	}
+
+	@Override
+	public List<LicenseDetail> selectByhospitalNumber(int hospitalNumber) {
+		// TODO Auto-generated method stub
+		
+		List<LicenseDetail> list = licensedao.selectByhospitalNumber(hospitalNumber);
+		return list;
+	}
+
+	
 	
 }

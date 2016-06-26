@@ -7,8 +7,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>license Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  
   <dependencies>
+    
 	    <!-- http://mvnrepository.com/artifact/org.springframework/spring-core -->
 	<dependency>
 	    <groupId>org.springframework</groupId>

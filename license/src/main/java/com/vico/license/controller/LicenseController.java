@@ -12,26 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alibaba.fastjson.JSON;
 import com.vico.license.pojo.LicenseDetail;
+import com.vico.license.service.HospitalService;
 import com.vico.license.service.LicenseService;
 
 @Controller
 @RequestMapping(value="licenseController")
 public class LicenseController {
 	
-	
-	private LicenseService licenseService;
-	public LicenseService getLicenseService() {
-		return licenseService;
-	}
 	@Autowired
-	public void setLicenseService(LicenseService licenseService) {
-		this.licenseService = licenseService;
-	}
+	private LicenseService licenseService;
+	
+	@Autowired
+	private HospitalService hospitalService;
 	
 	//去生成序列号页面
-	@RequestMapping(value="tocreate")
+	@RequestMapping(value="tocreatecode")
 	public String toCreate(HttpServletRequest request){
-		return "createcode";
+		return "creatcode2";
 	}
 	
 	
@@ -39,10 +36,8 @@ public class LicenseController {
 	@RequestMapping(value="createcode")
 	public void sourceCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=UTF-8");
-		String date = request.getParameter("duedate");  
-		//int number = Integer.parseInt(request.getParameter("hosnumber"));
 		
-		String sourcecode = licenseService.createSourceCode(date);
+		String sourcecode = licenseService.createSourceCode(request.getParameter("duedate"));
 		
 		String jsonstr = "{'success':'true','msg':'"+sourcecode+"'}";
 		JSON res = JSON.parseObject(jsonstr);
@@ -68,10 +63,10 @@ public class LicenseController {
 	
 	
 	//跳转到展示所有序列号页面
-	@RequestMapping(value="showall")
+	@RequestMapping(value="toshowallcodes")
 	public String showAll(HttpServletRequest request,HttpServletResponse response){
 		
-		return "showallcodes";
+		return "showallcodes2";
 	}
 	
 	//跳至框架
@@ -87,13 +82,19 @@ public class LicenseController {
 		List<LicenseDetail> list =  licenseService.listAllCodes();
 		
 		for(LicenseDetail ldetail:list){
-			
+			String hospitalName = null;
+			hospitalName = hospitalService.selectHospitalName(ldetail.getHospitalNumber());
+			ldetail.setHospitalName(hospitalName);
 			int lastday = licenseService.endDate(ldetail.getExpiredDate());    //获取每个序列号的剩余日期
 			
 			if(lastday <= 0){
 				ldetail.setExpiredFlag(1);
+				ldetail.setValidDays(0);
 			}
-			else ldetail.setExpiredFlag(0);
+			else{
+				ldetail.setExpiredFlag(0);
+				ldetail.setValidDays(lastday);
+			}
 		}
 		
 		String jsonlist = JSON.toJSONString(list);
@@ -111,32 +112,51 @@ public class LicenseController {
 	
 	//接收AJAX请求，删除指定ID的序列号条目
 	@RequestMapping(value="deletecode")
-	public String deleteCode(HttpServletRequest request){
+	public void deleteCode(HttpServletRequest request,HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");
 		
 		String codeID = request.getParameter("codeid");
 		
-		System.out.println("+++++++++++++++++++删除信息+++++++++++++++++++++++++++++"+codeID);
+		LicenseDetail licensedetail = licenseService.listOneCode(Integer.parseInt(codeID));
 		
-		licenseService.deleteCode(codeID);
+		int lastdays = licenseService.endDate(licensedetail.getExpiredDate());
 		
-		return "showallcodes";
+		if(lastdays > 0){
+			String jsonstr = "{'success':'true','msg':'该条序列号并未过期，删除失败'}";
+			JSON res = JSON.parseObject(jsonstr);
+			try {
+				response.getWriter().print(res);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			licenseService.deleteCode(codeID);
+			String jsonstr = "{'success':'true','msg':'删除成功'}";
+			JSON res = JSON.parseObject(jsonstr);
+			try {
+				response.getWriter().print(res);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
+		//return "showallcodes2";
 	}
 	
 	
 	//把序列号写进数据库,然后跳到展示所有序列号页面
 	@RequestMapping(value="savecode")
 	public String saveCode(LicenseDetail licensedetail){
-				
-		licensedetail.setCreateDay(licensedetail.getSourceNumber().substring(0, 10));          //生成日期
-		int days = licenseService.endDate(licensedetail.getExpiredDate());   //有效天数
-		licensedetail.setValidDays(days);
-		if(days > 0 ){
-			licensedetail.setExpiredFlag(0);                       //到期标识
-		}
-		else licensedetail.setExpiredFlag(1);
+		
 		licenseService.saveCode(licensedetail);
 		//return null;
-		return "redirect:/licenseController/showall";
+		return "redirect:/licenseController/toshowallcodes";
 	}
 	
 }

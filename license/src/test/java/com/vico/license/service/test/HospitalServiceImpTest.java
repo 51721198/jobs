@@ -28,4 +28,14 @@ public class HospitalServiceImpTest {
 		logger.info("**************测试信息*****************"+h.getHospitalName());
 	 }
 	}
+	
+	@Test
+	public void testSelectHospitalName(){
+		
+		logger.info("********************"+hospitalservice.selectHospitalName(25));
+	}
+	
+	
+	
+	
 }

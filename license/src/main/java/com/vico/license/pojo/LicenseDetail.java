@@ -16,8 +16,19 @@ public class LicenseDetail {
     private Integer validDays;
 
     private Integer hospitalNumber;
+    
+    private String hospitalName;
+   
 
-    public Integer getSerialNumberId() {
+	public String getHospitalName() {
+		return hospitalName;
+	}
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+
+	public Integer getSerialNumberId() {
         return serialNumberId;
     }
 

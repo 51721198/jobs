@@ -42,7 +42,9 @@ public class VerifyServiceImp implements VerifyService {
 		if(code.length() < 56){
 			return false;
 		}
-		String date = code.substring(10,20);
+		String str = MixDate.demixDate(code);
+		
+		String date = str.substring(10,20);
 		//System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>"+date);
 		int days = TimeDiff.countDay(date);
 		//System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>"+days);

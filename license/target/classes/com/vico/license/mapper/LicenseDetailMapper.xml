@@ -16,6 +16,13 @@
     valid_days, hospital_number
   </sql>
   
+  <select id="selectByhospitalNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from license_detail
+    where hospital_number = #{serialNumberId,jdbcType=INTEGER}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
