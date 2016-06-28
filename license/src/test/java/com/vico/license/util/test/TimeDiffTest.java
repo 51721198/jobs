@@ -14,8 +14,8 @@ public class TimeDiffTest {
 	public void testCountDay() {
 		//fail("Not yet implemented");
 		
-		TimeDiff.countDay("2018-01-01");
-		logger.info("**************测试结果*******************"+TimeDiff.countDay("2018-01-01"));
+		TimeDiff.countDay("2016-06-28");
+		logger.info("**************测试结果*******************"+TimeDiff.countDay("2016-06-28"));
 	}
 	
 }

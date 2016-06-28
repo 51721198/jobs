@@ -5,12 +5,12 @@ small {
 	color:#888
 }
 
-th,#navigation,.active,input[type=submit],.pagination a:hover,.date td a:hover {
+th,.del,#navigation,.active,input[type=submit],.pagination a:hover,.date td a:hover {
 	background:#434A48;
 	color:#fff
 }
 
-select, textarea, input, #content, #foot {
+select, textarea, input, button, #content, #foot {
 	background:#fff url(gradient.png) repeat-x 0 -28px
 }
 tr {

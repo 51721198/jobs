@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import com.vico.license.dao.HospitalDao;
 import com.vico.license.pojo.Hospital;
 
-
-
-
 @Service
 public class HospitalServiceImp implements HospitalService {
 
@@ -18,42 +15,29 @@ public class HospitalServiceImp implements HospitalService {
 	private HospitalDao hospitaldao;
 	
 
-	//获取所有医院信息
 	@Override
-	public List<Hospital> showAll() {
+	public List<Hospital> showAllHospitals() {
 		
 		List<Hospital> list = hospitaldao.showAll();
 		return list;
 	}
 	
-	//添加一条医院记录
 	@Override
-	public void addHospital(Hospital record) {
+	public void addHospital(Hospital hospital) {
 		
-		hospitaldao.insert(record);
+		hospitaldao.insert(hospital);
 	}
-
-	//获取一条医院信息
-	@Override
-	public Hospital showOne() {
-		
-		return null;
-	}
-
+	
 	@Override
 	public void deleteHospital(String hospitalnumber) {
-		// TODO Auto-generated method stub
-	
+		
 		hospitaldao.deleteByPrimaryKey(Integer.parseInt(hospitalnumber));
 	}
 	
-
 	@Override
 	public String selectHospitalName(int hospitalNumber) {
-		// TODO Auto-generated method stub
 		
 		String hospitalName = null;
-		//hospitalName = hospitaldao.selectByPrimaryKey(hospitalNumber).getHospitalName();
 		
 		if(hospitaldao.selectByPrimaryKey(hospitalNumber) == null){
 			return "无此医院信息";
@@ -62,6 +46,19 @@ public class HospitalServiceImp implements HospitalService {
 		hospitalName = hospitaldao.selectByPrimaryKey(hospitalNumber).getHospitalName();
 		
 		return hospitalName;
+	}
+	
+	@Override
+	public void updateHospital(Hospital hospital) {
+		
+		hospitaldao.updateByPrimaryKey(hospital);
+	}
+	
+	
+	@Override
+	public Hospital showOneHospital(int hospitalNumber) {
+		
+		return hospitaldao.selectByPrimaryKey(hospitalNumber);
 	}
 
 }

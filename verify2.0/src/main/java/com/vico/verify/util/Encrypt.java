@@ -2,11 +2,22 @@ package com.vico.verify.util;
 
 import java.security.MessageDigest;
 
+
+
+/**
+ * 两次加密：第一次MD5加密，第二次ascii码向右偏移两位
+ * 
+ * @author Liu.Dun
+ *
+ */
 public class Encrypt {
 	   
+	   //偏移量,此处写死了
+    	static final int offset = 2;
+	
 	public final static String MD5(String s) {
-        char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};       
-
+        char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};   
+        
         try {
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
@@ -35,24 +46,10 @@ public class Encrypt {
             int leng = oricode.length;
             int[] afcode = new int[leng];
             for(int i=0;i<leng;i++){
-            	afcode[i] = oricode[i] + 2;                //所有字符的ascii码偏移两位
+            	afcode[i] = oricode[i] + offset;                //所有字符的ascii码偏移
             	char lastcode = (char)afcode[i];
             	sb.append(lastcode);
            }
-            
-            /*  第二次加密的反运算：
-            StringBuffer sb2 = new StringBuffer();
-            char[]oricode2 = sb.toString().toCharArray();
-            int leng2 = oricode2.length;
-            int[] afcode2 = new int[leng2];
-            for(int m=0;m<leng2;m++){
-            	afcode2[m] = (int)oricode2[m] -2;
-            	char lastcode2 = (char)afcode2[m];
-            	sb2.append(lastcode2);
-            }
-            	System.out.println("==========sb2======"+sb2.toString());
-            	*/
-            
             return sb.toString();
         } catch (Exception e) {
             e.printStackTrace();

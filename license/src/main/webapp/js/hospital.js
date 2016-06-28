@@ -4,10 +4,21 @@ $(document).ready(function(){                                         //初始�
 					url:"/license/hospitalController/showhospital",
 				    dataType:"json",
 				    success:function(data){
-				    	var pageTiao = 14;
+				    	var pageTiao = 14;             //每页展示多少条数据
+				    	//计算总页面数
+				    	var totalPage = 1;
+				    	if(data.length%pageTiao != 0){
+				    		totalPage = data.length/pageTiao +1;
+				    		//alert(totalPage);
+				    	}
+				    	if(data.length%pageTiao == 0){
+				    		totalPage = data.length/pageTiao;
+				    		//alert(totalPage);
+				    	}
 				    	function initUI(pageNo, pageSize) {
 				    		//alert("here2");
-				    		var rows = $("#allhospital").find("tr").length;
+
+				    var rows = $("#allhospital").find("tr").length;
 				    if (rows > 1) { // 判断table中是否有数据，若有则先进行清除
 					for (var j = rows - 1; j > 0; j--) {
 						//从表的最下端往最上端删除，防止删到表头！！！！！注意这种表删除的写法
@@ -15,6 +26,8 @@ $(document).ready(function(){                                         //初始�
 						console.info(j);
 					              }
 				     }   
+
+
 				    	    for (var i = (pageNo-1)*pageSize; i < pageNo*pageSize; i++) {
 				    	    	var but = "button_"+i;
 				    	    	var but2 = "button2_"+i;
@@ -24,11 +37,18 @@ $(document).ready(function(){                                         //初始�
 				    	    			+ data[i].hospitalPhone + "</td><td>" 
 				    	    			+ data[i].hospitalAddress + "</td><td>" 
 				    	    			+ "<button id="+but+" type='button' class='del' value="+data[i].hospitalNumber+">删除</button>"
-				    	    			+ "&nbsp&nbsp<button id="+but2+" type='button' value="+data[i].hospitalNumber+">修改</button>"
-				    	    			// + "<a href='' id="+but+" class='del' value="+data[i].hospitalNumber+">删除</a>"
-				    	    			// + "<a href='' id="+but2+" class='mod' value="+data[i].hospitalNumber+">修改</a>"
+				    	    			+ "&nbsp&nbsp&nbsp&nbsp<button id="+but2+" type='button' class='mod' value="+data[i].hospitalNumber+">修改</button>"
 				    	    			+"</td></tr>");
-				    	    	  //       $("#"+but).attr("value");
+
+				    	    	$("#allhospital tr").hover(
+				    	    				  function(){
+											   if(this.id != "trid"){
+											    $(this).css("background-color","#EEEEEE"); 
+											    	}
+											  },
+											  function(){
+											   $(this).css("background-color","");
+											  });
 
 				    	    	$("#"+but).on("click",function(){
 						    		//do something;
@@ -52,13 +72,20 @@ $(document).ready(function(){                                         //初始�
 										 });  
 						    	     }
 					           });
+
+				    	    	$("#"+but2).on("click",function(){
+						    		//do something;
+						    		var test2 = $(this).val();
+						    		location.href="/license/hospitalController/toaddhospital?hospitalNumber=" +test2;
+						    	     
+					           });
 				    	  }
 
-				    	  pagination({                           //定义四个参数
+				    	  pagination({                                //定义四个参数
 											cur: pageNo,              //当前页
-											total: 6,                 //总的页面数
+											total: totalPage,                 //总的页面数
 											len: 4,                   //显示多少个可点的数字
-											targetId: 'pagination',   //分页条在页面中的位置？
+											targetId: 'pagination',   //分页条在页面中的DOM位置
 											callback: function() {
 												var me = this;
 												var oPages = $(".page-index");

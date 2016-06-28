@@ -1,10 +1,14 @@
-
-		$(document).ready(function(){                                         //初始化jQuery
+$(document).ready(function(){ 
 			$("#createcode").click(function(){                                //生成原始序列号
-				if($("#hosnumber").val()=='' || $("#duedate").val()==''){
-					alert("请填写完整信息");
-					return false;
+				if($("#hosnumber").val()==''){
+					$("#warn-number").html("*请选择一家医院！");
 				}
+
+				if($("#duedate").val()==''){
+					$("#warn-date").html("*请填写到期日期！");
+				}
+				//alert("here");
+				if($("#hosnumber").val() !=='' && $("#duedate").val() !==''){
 				$.ajax({
 				type:"GET",
 				url:"/license/licenseController/createcode?hosnumber=" +$("#hosnumber").val()+"&duedate=" +$("#duedate").val(),
@@ -18,16 +22,17 @@
 			    },
 			    error:function(jqXHR){
 				alert("发生错误：" +jqXHR.status);			    	
-			}
-		});
-	});
-//}); 函数总关闭括号，容易遗漏！
+					}
+			});
+		}
+});
 
 			$("#encryptcode").click(function(){                              //加密序列号
 				if($("#code1").val()==''){
-					alert("请先生成序列号！");
+					$("#warn-encrypt").html("*请先生成序列号！");
 					return false;
 				}
+
 				$.ajax({
 				type:"POST",
 				url:"/license/licenseController/encryptcode",
@@ -64,16 +69,27 @@
 				alert("发生错误：" +jqXHR.status);			    	
 			}
 		});
-			
+				$("#duedate").click(function() {
+					 // body...  
+					 $("#code1").val('');
+					 $("#code2").val('');
+				});
+
+				$("#select_id").click(function() {
+					 // body...  
+					 $("#code1").val('');
+					 $("#code2").val('');
+				});
+
 				$("#select_id").change(function(){
 					$("#hosnumber").val($("#select_id").val());
 				});
 				
 				$("#go").click(function(){
 					if($("#code2").val()==''){
-						alert("请先获取加密序列号！");
+						$("#warn-go").html("*请先获取加密序列号！");
 						return false;									
 					}					
 				});
+
 });	        //总函数关闭括号
-		

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.vico.verify.service.VerifyServiceImpTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.341 sec <<< FAILURE!
-testSourceNumber(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.008 sec  <<< ERROR!
+Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.201 sec <<< FAILURE!
+testSourceNumber(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.006 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -56,7 +56,7 @@ Caused by: java.io.FileNotFoundException: class path resource [spring.xml] canno
 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330)
 	... 43 more
 
-testCheckComID(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0 sec  <<< ERROR!
+testCheckComID(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.004 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -110,7 +110,7 @@ Caused by: java.io.FileNotFoundException: class path resource [spring.xml] canno
 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330)
 	... 43 more
 
-testInsertCode(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.002 sec  <<< ERROR!
+testInsertCode(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -164,7 +164,7 @@ Caused by: java.io.FileNotFoundException: class path resource [spring.xml] canno
 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330)
 	... 43 more
 
-testCheckSourceNUmber(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testCheckSourceNUmber(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.003 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -218,7 +218,7 @@ Caused by: java.io.FileNotFoundException: class path resource [spring.xml] canno
 	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330)
 	... 43 more
 
-testCheckDate(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.002 sec  <<< ERROR!
+testCheckDate(com.vico.verify.service.VerifyServiceImpTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)

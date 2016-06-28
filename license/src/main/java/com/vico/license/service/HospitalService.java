@@ -5,14 +5,17 @@ import com.vico.license.pojo.Hospital;
 
 public interface HospitalService {
 	
-	public List<Hospital> showAll();
+	public List<Hospital> showAllHospitals();
 	
 	public String selectHospitalName(int hospitalNumber);
 	
 	public void addHospital(Hospital hospital);
 	
-	public Hospital showOne();
+	public Hospital showOneHospital(int hospitalNumber);
 	
-	public void deleteHospital(String hospitalnumber);
+	public void deleteHospital(String hospitalNumber);
+	
+	public void updateHospital(Hospital hospital);
+	
 
 }

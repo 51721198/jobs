@@ -24,7 +24,7 @@
 			
 			<div id="content" class="container_16 clearfix">
 				<div class="grid_16">
-					<h2>添加医院</h2>
+					<h2>添加/修改医院</h2>
 				</div>
 				
 			<form action="/license/hospitalController/addhospital" method="post">
@@ -37,22 +37,28 @@
 				
 				<div class="grid_8" style="clear: both">
 						<p>
-						医院电话：<input type="text" name="hospitalPhone">
+						医院电话：<input id="phone" type="text" name="hospitalPhone">
+						</p>
+				</div>
+				
+				<div class="grid_8" style="clear: both;display: none">
+						<p>
+						医院编号：<input id="number" type="text" name="hospitalNumber" readonly="readonly" >
 						</p>
 				</div>
 				
 				
 				<div class="grid_8" style="clear: both">
 					<p>
-				         医院地址：<input type="text" name="hospitalAddress">
+				         医院地址：<input id="address" type="text" name="hospitalAddress">
 					</p>
 				</div>
 
 
 				<div class="grid_16" style="clear: both">
 					<p>
-						<input type="reset" value="重置" />
-						<input id="go" type="submit" value="提交">
+						<input type="reset" value="重置" style="margin-left: 30px"/>
+						<input id="go" type="submit" value="提交" style="margin-left: 30px">
 					</p>
 				</div>
 				

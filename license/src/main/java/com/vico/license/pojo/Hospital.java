@@ -1,5 +1,12 @@
 package com.vico.license.pojo;
 
+/**
+ * 
+ * @ClassName: Hospital
+ * @Description: 医院信息
+ * @author: Liu.Dun
+ * @date: 2016年6月27日 下午8:46:57
+ */
 public class Hospital {
     private Integer hospitalNumber;
 

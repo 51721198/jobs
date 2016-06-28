@@ -6,7 +6,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;  
   
 
-//获取系统唯一标识：硬盘ID
+/**
+ * 
+ * @ClassName: MachineID
+ * @Description: 获取系统唯一标识：cpuID
+ * @author: Liu.Dun
+ * @date: 2016年6月27日 下午9:13:06
+ */
 public class MachineID {  
   
     public static String getCPUSerial() {
@@ -41,7 +47,6 @@ public class MachineID {
         if (result.trim().length() < 1 || result == null) {
             result = "无CPU_ID被读取";
         }
-        System.out.println("cpu编号是："+result);
         return result.trim();
     }
 } 

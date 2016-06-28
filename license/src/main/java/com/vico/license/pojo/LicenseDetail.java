@@ -1,5 +1,12 @@
 package com.vico.license.pojo;
 
+/**
+ * 
+ * @ClassName: LicenseDetail
+ * @Description: 序列号信息
+ * @author: Liu.Dun
+ * @date: 2016年6月27日 下午8:47:32
+ */
 public class LicenseDetail {
     private Integer serialNumberId;
 

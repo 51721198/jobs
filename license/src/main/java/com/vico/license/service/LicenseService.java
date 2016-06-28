@@ -22,4 +22,12 @@ public interface LicenseService {
 	
 	public List<LicenseDetail> selectByhospitalNumber(int hospitalNumber);
 	
+	/**
+	 * @param:
+	 * @return: void
+	 * @Title: taskChangeData
+	 * @Description: spring定时任务，每隔24小时自动修改一次序列号信息
+	 */
+	public void taskChangeData();
+	
 }

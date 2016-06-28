@@ -4,6 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+	/**
+	 * 
+	 * @ClassName: TimeDiff
+	 * @Description: 比较传入的日期与系统当前日期的时间差
+	 * @author: Liu.Dun
+	 * @date: 2016年6月27日 下午9:03:01
+	 */
 public class TimeDiff {
 	
 	public static int countDay(String duedate){
@@ -24,7 +31,7 @@ public class TimeDiff {
 		long diff = n1 - n2;
 
 		diff /= 3600 * 1000 * 24;
-		return (int) diff;
+		return (int) diff+1;
 		
 	}
 }

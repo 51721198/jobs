@@ -23,7 +23,7 @@ public class HospitalServiceImpTest {
 	
 	@Test
 	public void testShowNames() {
-		List<Hospital> list = hospitalservice.showAll();
+		List<Hospital> list = hospitalservice.showAllHospitals();
 		for(Hospital h:list){
 		logger.info("**************测试信息*****************"+h.getHospitalName());
 	 }

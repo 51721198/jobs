@@ -4,9 +4,21 @@ $(document).ready(function(){                                    //初始化jQue
 					url:"/license/licenseController/showallcodes",
 				    dataType:"json",
 
+
 				    success:function(data){
 				    	//每页显示多少条记录
 				    	var pageTiao = 10;
+				    	//计算总页面数
+				    	var totalPage = 1;
+				    	if(data.length%pageTiao != 0){
+				    		totalPage = data.length/pageTiao +1;
+				    		//alert(totalPage);
+				    	}
+				    	if(data.length%pageTiao == 0){
+				    		totalPage = data.length/pageTiao;
+				    		//alert(totalPage);
+				    	}
+
 				    	function initUI(pageNo, pageSize) {
 				    		//alert("here2");
 				    		var rows = $(".allcodes").find("tr").length;
@@ -33,6 +45,7 @@ $(document).ready(function(){                                    //初始化jQue
 				    	    			+ data[i].validDays + "</td><td>" 
 				    	    			+ data[i].hospitalName+"</td><td>"
 				    	    			+ "<button id="+but+" class='del' type='button' value="+data[i].serialNumberId+">删除</button>"+"</td></tr>");
+
 						    	    		if(data[i].expiredFlag == 1){
 						                          			//alert("#rownum_"+i);
 										    	    	$("#"+row).css("background-color","#CCCCCC");
@@ -66,10 +79,13 @@ $(document).ready(function(){                                    //初始化jQue
 		                          						//拼接完成后读取整个表的行数
 		                             console.info("第二次"+$(".allcodes").find("tr").length);  
 
+				                             
+
+
 
                            		pagination({                           //定义四个参数
 											cur: pageNo,              //当前页
-											total: 6,                 //总的页面数
+											total: totalPage,         //总的页面数
 											len: 4,                   //显示多少个可点的数字
 											targetId: 'pagination',   //分页条在页面中的位置？
 											callback: function() {

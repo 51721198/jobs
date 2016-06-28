@@ -16,6 +16,13 @@ import com.vico.license.pojo.LicenseDetail;
 import com.vico.license.service.HospitalService;
 import com.vico.license.service.LicenseService;
 
+
+	/** 
+	 * 
+	 *@医院信息系统控制器
+	 * @author Liu.Dun
+	 *
+	 */
 @Controller
 @RequestMapping(value="hospitalController")
 public class HospitalController {
@@ -26,21 +33,18 @@ public class HospitalController {
 	@Autowired
 	private LicenseService licenseservice;
 	
-	//至展示所有医院页面
 	@RequestMapping(value="toshowallhospital")
 	public String hospital(){
 		return "hospital2";
 	}
 	
-	//数据库检索所有医院条目
 	@RequestMapping(value="showhospital")
-	public void showHospital(HttpServletResponse response){
+	public void showAllHospital(HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
-		List<Hospital> list =  hospitalservice.showAll();
+		List<Hospital> list =  hospitalservice.showAllHospitals();
 		
 		String jsonlist = JSON.toJSONString(list);
 		JSON res = JSON.parseArray(jsonlist);
-		//Json jsonallcodes = licenseService.objectToJson(list);
 		try {
 			response.getWriter().print(res);
 		} catch (IOException e) {
@@ -48,20 +52,67 @@ public class HospitalController {
 		}
 	}
 	
-	//至添加医院页面
 	@RequestMapping(value="toaddhospital")
 	public String toAdd(){
 		return "addhospital2";
 	}
 	
-	//AJAX添加医院
+	/**
+	 * @由医院编号获取医院信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="showone")
+	public void selectOneHospital(HttpServletRequest request,HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");
+		
+		if(request.getParameter("hospitalNumber") != null && request.getParameter("hospitalNumber") != "" ){
+		int hospitalNumber = Integer.parseInt(request.getParameter("hospitalNumber"));
+		Hospital hospital = hospitalservice.showOneHospital(hospitalNumber);
+				
+		String jsonlist = JSON.toJSONString(hospital);
+				JSON res = JSON.parseObject(jsonlist);
+				try {
+					response.getWriter().print(res);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}	
+		else{
+			String jsonlist = "{}";
+		JSON res = JSON.parseObject(jsonlist);
+		try {
+			response.getWriter().print(res);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+		
+	
 	@RequestMapping(value="addhospital")
 	public String addHospital(Hospital hospital){
+		
+		//根据hospitalNumber的值是否存在判断是添加还是修改
+		if(hospital.getHospitalNumber() == null){
 		hospitalservice.addHospital(hospital);
+		return "redirect:/hospitalController/toshowallhospital";
+		}
+		
+		//修改医院信息
+		hospitalservice.updateHospital(hospital);
 		return "redirect:/hospitalController/toshowallhospital";
 	} 
 	
-	//AJAX删除医院
+	/**
+	 * @param:
+	 * @return: void
+	 * @Title: deleteHospital
+	 * @Description: 删除医院，有关联序列号信息的医院禁止删除
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value="deletehospital")
 	public void deleteHospital(HttpServletRequest request,HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
@@ -73,7 +124,6 @@ public class HospitalController {
 			try {
 				response.getWriter().print(res);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -84,7 +134,6 @@ public class HospitalController {
 			try {
 				response.getWriter().print(res);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

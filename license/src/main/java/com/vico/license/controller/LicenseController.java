@@ -17,6 +17,14 @@ import com.vico.license.service.LicenseService;
 
 @Controller
 @RequestMapping(value="licenseController")
+
+/**
+ * 
+ * @ClassName: LicenseController
+ * @Description: 序列号管理系统控制器
+ * @author: Liu.Dun
+ * @date: 2016年6月27日 下午8:40:05
+ */
 public class LicenseController {
 	
 	@Autowired
@@ -25,14 +33,12 @@ public class LicenseController {
 	@Autowired
 	private HospitalService hospitalService;
 	
-	//去生成序列号页面
 	@RequestMapping(value="tocreatecode")
 	public String toCreate(HttpServletRequest request){
 		return "creatcode2";
 	}
 	
 	
-	//接收前端AJAX请求:生成序列号
 	@RequestMapping(value="createcode")
 	public void sourceCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=UTF-8");
@@ -42,11 +48,9 @@ public class LicenseController {
 		String jsonstr = "{'success':'true','msg':'"+sourcecode+"'}";
 		JSON res = JSON.parseObject(jsonstr);
 		
-		System.out.println(res);
 		response.getWriter().print(res);
 	}
 	
-	//接受前端AJAX请求：加密序列号
 	@RequestMapping(value="encryptcode")
 	public void encryptCode(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		
@@ -62,20 +66,21 @@ public class LicenseController {
 	}
 	
 	
-	//跳转到展示所有序列号页面
 	@RequestMapping(value="toshowallcodes")
 	public String showAll(HttpServletRequest request,HttpServletResponse response){
 		
 		return "showallcodes2";
 	}
 	
-	//跳至框架
-	@RequestMapping(value="frame")
-	public String frame(){
-		return "frame1";
-	}
-	
-	//接收AJAX请求：获取所有序列号用于展示
+	/**
+	 * @param:
+	 * @return: void
+	 * @Title: showAllCodes
+	 * @Description: 获取所有序列号，并且获取序列号对应的医院名称
+	 * @param request
+	 * @param response
+	 *
+	 */
 	@RequestMapping(value="showallcodes")
 	public void showAllCodes(HttpServletRequest request,HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
@@ -85,7 +90,7 @@ public class LicenseController {
 			String hospitalName = null;
 			hospitalName = hospitalService.selectHospitalName(ldetail.getHospitalNumber());
 			ldetail.setHospitalName(hospitalName);
-			int lastday = licenseService.endDate(ldetail.getExpiredDate());    //获取每个序列号的剩余日期
+			int lastday = licenseService.endDate(ldetail.getExpiredDate());    
 			
 			if(lastday <= 0){
 				ldetail.setExpiredFlag(1);
@@ -100,17 +105,22 @@ public class LicenseController {
 		String jsonlist = JSON.toJSONString(list);
 		
 		JSON res = JSON.parseArray(jsonlist);
-		//Json jsonallcodes = licenseService.objectToJson(list);
-		
 		try {
 			response.getWriter().print(res);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	//接收AJAX请求，删除指定ID的序列号条目
+	/**
+	 * @param:
+	 * @return: void
+	 * @Title: deleteCode
+	 * @Description: 删除序列号，如果序列号未过期则禁止删除
+	 * @param request
+	 * @param response
+	 *
+	 */
 	@RequestMapping(value="deletecode")
 	public void deleteCode(HttpServletRequest request,HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
@@ -127,10 +137,10 @@ public class LicenseController {
 			try {
 				response.getWriter().print(res);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		else{
 			licenseService.deleteCode(codeID);
 			String jsonstr = "{'success':'true','msg':'删除成功'}";
@@ -138,24 +148,16 @@ public class LicenseController {
 			try {
 				response.getWriter().print(res);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		
-		
-		
-		//return "showallcodes2";
 	}
 	
 	
-	//把序列号写进数据库,然后跳到展示所有序列号页面
 	@RequestMapping(value="savecode")
 	public String saveCode(LicenseDetail licensedetail){
 		
 		licenseService.saveCode(licensedetail);
-		//return null;
 		return "redirect:/licenseController/toshowallcodes";
 	}
 	

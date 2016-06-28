@@ -26,7 +26,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="F:\LiudProject\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf4760101976267771451.tmp"/>
+    <property name="classworlds.conf" value="F:\LiudProject\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf6139387633682562604.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
     <property name="java.library.path" value="C:\Java\jdk1.8.0_60\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Java/bin/server;C:/Java/bin;C:/Java/lib/amd64;F:\app\Liu.Dun\product\11.2.0\dbhome_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Java\jdk1.8.0_60\bin;D:\tools source\mysql-5.6.23-winx64\mysql-5.6.23-winx64\bin;D:\tools source\apache-tomcat-8.0.33-windows-x64\apache-tomcat-8.0.33\bin;D:\tools source\apache-tomcat-8.0.33-windows-x64\apache-tomcat-8.0.33\lib;D:\tools source\apache-maven-3.2.1\apache-maven-3.2.1\bin;D:\svn\bin;C:\Program Files\nodejs\;C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\Users\Liu.Dun\AppData\Roaming\npm;D:\eclipse-jee-mars-2-win32-x86_64 (1)\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
