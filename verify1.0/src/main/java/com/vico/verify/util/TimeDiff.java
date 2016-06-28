@@ -4,20 +4,23 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 
+ * @ClassName: TimeDiff
+ * @Description: 比较传入的日期与系统当前日期的时间差
+ * @author: Liu.Dun
+ * @date: 2016年6月27日 下午9:03:01
+ */
 public class TimeDiff {
-	
-	
-	//计算给定日期与系统当前日期之间相差时间，为负表示该给定日期过期
-	public static int countDay(String duedate){
-		
-		
+
+	public static int countDay(String duedate) {
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date dateend = null;
 		try {
 			dateend = sdf.parse(duedate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Date datenow = new Date();
@@ -26,7 +29,7 @@ public class TimeDiff {
 		long diff = n1 - n2;
 
 		diff /= 3600 * 1000 * 24;
-		return (int) diff;
-		
+		return (int) diff + 1;
+
 	}
 }
